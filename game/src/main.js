@@ -424,6 +424,11 @@ function runGame() {
           saveGame(G);
         }
       }
+    } else if (G.state === 'paused') {
+      // P toggles pause back off (the Resume button does the same). A single
+      // tap cannot double-toggle: the press that paused was consumed by
+      // endFrame() at the bottom of the frame that paused the game.
+      if (G.input.wasPressed('KeyP')) resumeGame();
     } else if (G.state === 'menu') {
       // Idle city behind the menu: traffic and pedestrians keep moving.
       accumulator += frameDt;
